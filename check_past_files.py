@@ -20,7 +20,7 @@ timetable = [
 # generate and iterate through dates
 start_date = datetime.datetime(2022, 9, 5)
 end_date = datetime.datetime.now()
-days = int((end_date - start_date).days)
+days = int((end_date - start_date).days) + 7  # +7 to check next week
 # but keep a counter for files found
 file_num = 0
 for day in range(days):
