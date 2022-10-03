@@ -31,9 +31,15 @@ for day in range(days):
         continue
     for lesson in timetable[wday]:
         expected_file = the_date_str + '-' + lesson + '.md'
-        if expected_file == school_posts[file_num]:
-            print(expected_file, "OK")
-            file_num += 1
-        else:
-            print("Expected", expected_file, "but got", school_posts[file_num])
+        if file_num == len(school_posts):
+            print("Expected", expected_file,
+                  "but there's no file left.")
             exit(1)
+        else:
+            if expected_file == school_posts[file_num]:
+                print(expected_file, "OK")
+                file_num += 1
+            else:
+                print("Expected", expected_file,
+                      "but got",  school_posts[file_num])
+                exit(1)
