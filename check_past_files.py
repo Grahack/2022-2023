@@ -2,6 +2,7 @@
 import os, datetime
 
 articles_dir = "."
+holidays = [('20221024', '20221106')]
 
 # grab files as a list of str
 school_posts = ['20220905-0800-2SIOA.md']  # fake lesson (year started at 10AM)
@@ -25,10 +26,22 @@ days = int((end_date - start_date).days) + 7  # +7 to check next week
 file_num = 0
 for day in range(days):
     the_date = start_date + datetime.timedelta(day)
-    the_date_str = the_date.strftime('%Y%m%d')
-    wday = the_date.weekday()
-    if wday >= 5:
+    # holidays check
+    on_holidays = False
+    for holiday in holidays:
+        startdate = datetime.datetime.strptime(holiday[0], '%Y%m%d')
+        enddate   = datetime.datetime.strptime(holiday[1], '%Y%m%d')
+        if startdate <= the_date <= enddate:
+            on_holidays = True
+            continue
+    if on_holidays:
         continue
+    wday = the_date.weekday()
+    if wday >= 5:  # nothing on saturdays
+        continue
+    if not timetable[wday]:  # day with no lesson
+        continue
+    the_date_str = the_date.strftime('%Y%m%d')
     for lesson in timetable[wday]:
         expected_file = the_date_str + '-' + lesson + '.md'
         if file_num == len(school_posts):
