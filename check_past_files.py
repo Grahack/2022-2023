@@ -2,7 +2,8 @@
 import os, datetime
 
 articles_dir = "."
-holidays = [('20221024', '20221106')]
+holidays = [('20221024', '20221106'),
+            ('20221217', '20230103')]
 
 # grab files as a list of str
 school_posts = ['20220905-0800-2SIOA.md']  # fake lesson (year started at 10AM)
