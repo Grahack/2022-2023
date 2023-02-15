@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os, datetime
 
+print_OK = False
 articles_dir = "."
 holidays = [('20221024', '20221106'),
             ('20221217', '20230103')]
@@ -51,7 +52,8 @@ for day in range(days):
             exit(1)
         else:
             if expected_file == school_posts[file_num]:
-                print(expected_file, "OK")
+                if print_OK:
+                    print(expected_file, "OK")
                 file_num += 1
             else:
                 print("Expected", expected_file,
